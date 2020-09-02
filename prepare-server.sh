@@ -8,7 +8,10 @@
 GRADLE_OPTS="-Dgradle.user.home=~/gradle_cache"    #
 ####################################################
 
-
+#crio-solution
+#start
+cp ./initial_data_load.json ./buildout/src/test/resources/initial_data_load.json
+#end
 
 ./gradlew clean bootrun &
 
@@ -18,4 +21,9 @@ while ! netstat -tna | grep 'LISTEN\>' | grep -q ':8081\>'; do
 done
 
 # If you have any script to load the data make sure that its part of this bash script.
+#mongoexport -d initial_data_load -c form
 
+#crio-solution
+#start
+./gradlew loaddata
+#end

@@ -1,11 +1,20 @@
 [
   {
-    "name":"verify data insert",
+    "name":"data insert",
     "url": "/quiz/1",
     "method": "PUT",
     "input": "initial_data_load.json",
     "status": 201,
     "verification": "STATUS",
     "response": "empty"
+  },
+  {
+    "name":"verify data insert",
+    "url": "/quiz/1",
+    "method": "GET",
+    "input": "empty",
+    "status": 201,
+    "verification": "STATUS",
+    "response": "fixtures/sample_get_questions_response.json"
   }
 ]

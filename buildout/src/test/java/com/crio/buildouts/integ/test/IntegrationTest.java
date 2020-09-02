@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -95,8 +96,9 @@ public class IntegrationTest {
         .exchange()
         .block()
         .bodyToMono(String.class).block();
-
+    
     Assertions.assertNull(response);
+
   }
 
   private String resolveFileAsString(String input) throws URISyntaxException, IOException {
@@ -112,6 +114,7 @@ public class IntegrationTest {
 
     String content = resolveFileAsString(config.getResponse());
 
+
     WebClient client = WebClient
         .builder()
         .baseUrl(BASE_URL)
@@ -125,7 +128,8 @@ public class IntegrationTest {
         .bodyToMono(String.class).block();
 
     System.out.println(response);
-    //JSONAssert.assertEquals(content, response, false);
+    
+    JSONAssert.assertEquals(content, response, false);
   }
 
 
@@ -150,7 +154,7 @@ public class IntegrationTest {
         .bodyToMono(String.class).block();
 
     System.out.println(response);
-    //JSONAssert.assertEquals(responseContent, response, false);
+    JSONAssert.assertEquals(responseContent, response, false);
   }
 
   public static void main(String[] args) throws IOException, URISyntaxException {
